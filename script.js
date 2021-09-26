@@ -73,7 +73,7 @@ startBtn.addEventListener("click", startGame);
 
 
 // Timer Function Begin
-var timeLeft = 75;
+var timeLeft = 60;
 var startScore = 0;
 var timer = document.getElementById("timer");
 
@@ -118,10 +118,10 @@ function renderQuestion() {
 // Check Answers
 function checkAnswer(answer) {
     if(questions[runningQuestionIndex].correct == answer) {
-        answerOutput.textContent = "Correct!"
+        answerOutput.textContent = "Correct ✔️"
     }
     else {
-       answerOutput.textContent = "Wrong!"
+       answerOutput.textContent = "Wrong ❌"
        timeLeft -=10;
     }
 
@@ -146,6 +146,7 @@ function resultRender() {
 
 //Capture Score and Initials 
 userInfo.addEventListener("click", function() {
+    event.preventDefault();
     var contactInfo = document.getElementById("contactInfo").value;
 
     localStorage.setItem("contactInfo", JSON.stringify (contactInfo));
