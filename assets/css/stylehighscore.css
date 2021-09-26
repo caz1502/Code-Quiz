@@ -10,7 +10,7 @@ font-family: 'Russo One', sans-serif;
 /*Styling for entire webpage*/
 html {
 
-  background: url(DarthVader.jpg) no-repeat center center fixed; 
+  background: url(DarthVader.jpg) no-repeat center center fixed;  
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

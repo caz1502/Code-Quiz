@@ -95,14 +95,14 @@ ul {
 .choice-button {
   border: none;
   border-radius: 5px;
-  width: 15vw;
-  height: 4vh;
+  width: 18vw;
+  height: 8vh;
   margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 10px;
   padding-top: 2px;
   color: gold;
-  font-size: 15pt;
+  font-size: 1.5vw;
   text-align: left;
   outline: none;
   background-color: black;
@@ -111,15 +111,13 @@ ul {
 
 .choice-button:hover {
   background-color:grey;
-  -webkit-text-stroke: 2px black;
   letter-spacing: 0.1em;
 } 
 
 #answerOutput {
   padding-top: 20px;
-  font-style: italic;
-  color:black;
-  font-size: 20pt;
+  color:yellow;
+  font-size: 4vw;
 }
 
 /* Score Style */
