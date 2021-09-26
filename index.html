@@ -3,10 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- linking style sheet -->
         <link rel="stylesheet" href="./assets/css/style.css">
+        <!-- linking google font for starwars -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Russo One">
-        <title>Code Quiz</title>
-        
+        <title>Code Quiz</title>        
     </head>
     <body>
          <!---Header with timer and high score link-->
@@ -29,6 +30,7 @@
                 <div id= "question"></div>
                     <div id= "choices">
                         <ul>
+                            <!-- buttons to choose answers -->
                             <li><button type="button" class="choice option-1 choice-button" id="1" onclick="checkAnswer('1')"></button></li>
                             <li><button type="button" class="choice option-2 choice-button" id="2" onclick="checkAnswer('2')"></button></li>
                             <li><button type="button" class="choice option-3 choice-button" id="3" onclick="checkAnswer('3')"></button></li>
@@ -47,11 +49,12 @@
                     <div id="initials">
                         <label for="users" id="name">Enter Initials:</label>
                         <input type="text" id="contactInfo">
-                        <input type="button" id= "userInfo" class="submitBtn" onclick="location.href='highscore.html';" value="Submit" />
+                        <input type="button" id= "userInfo" class="submitBtn" onclick="location.href='highscores.html';" value="Submit" />
                     </div>
                 </form>
             </div>
         </main> 
+        <!-- linking js -->
         <script src="script.js"></script>
     </body>
 </html>
