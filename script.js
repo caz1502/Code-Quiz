@@ -118,10 +118,10 @@ function renderQuestion() {
 // Check Answers
 function checkAnswer(answer) {
     if(questions[runningQuestionIndex].correct == answer) {
-        answerOutput.textContent = "Correct ✔️"
+        answerOutput.textContent = "Well done✔️"
     }
     else {
-       answerOutput.textContent = "Wrong ❌"
+       answerOutput.textContent = "Sorry ❌"
        timeLeft -=10;
     }
 
