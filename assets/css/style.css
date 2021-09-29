@@ -6,18 +6,22 @@
   font-family: "Russo One";
 }
 
+/* styling for background image */
 html {
   background: url(Yoda.PNG) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  flex-shrink: inherit;
+ 
 }
 /* Header Style */
 #header {
   margin-top: 20px;
 }
 
+/* styling and alignment for #score image */
 #score {
   text-decoration: none;
   color: gold;
@@ -27,6 +31,7 @@ html {
   letter-spacing: 0.1em;
 }
 
+/* styling and alignment for #timer image */
 #timer {
   text-align: right;
   margin-top: -20px;
@@ -46,6 +51,7 @@ html {
  
 }
 
+/* styling for Rules  */
 #rules {
   font-size: 19px;
   display: inline-block;
@@ -55,6 +61,7 @@ html {
   text-align: justify;
 }
 
+/* styling for start button */
 .btnStart {
   padding-left: 15px;
   padding-right: 15px;
@@ -70,6 +77,7 @@ html {
 
 }
 
+/* hover action for start button */
 .btnStart:hover {
   background-color: gray;
 }
@@ -80,51 +88,57 @@ html {
   margin-left: 40%;
 }
 
+/* styling for questions */
 #question {
-  font-size: 20pt;
+  font-size: 3rem;
   font-weight: bold;
   text-align: left;
-  margin-right: 28%; 
-  font-size: 30pt
+  margin-right: 20%; 
+  padding-bottom: 2rem;
+ 
 }
 
+/* removes list buttons */
 ul {
   list-style: none;
 }
 
+/* styling for choice buttons */
 .choice-button {
   border: none;
   border-radius: 5px;
-  width: 18vw;
-  height: 8vh;
+  width: 15rem;
+  height: 5rem;
   margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 10px;
   padding-top: 2px;
   color: gold;
-  font-size: 1.5vw;
+  font-size: 1.5rem;
   text-align: left;
   outline: none;
   background-color: black;
   letter-spacing: 0.1em;
 }
 
+/* hover action for choice button */
 .choice-button:hover {
   background-color:grey;
   letter-spacing: 0.1em;
 } 
 
+/* styling for answer result */
 #answerOutput {
-  padding-top: 20px;
+  padding-top: 25px;
   color:yellow;
-  font-size: 4vw;
+  font-size: 3rem;
 }
 
 /* Score Style */
 #endMessage {
   margin-top: 15%;
   font-weight: bold;
-  font-size: x-large;
+  font-size: 5rem;
   padding-bottom: 10px;
   margin-left: 40%;
 }
@@ -133,11 +147,14 @@ ul {
   margin-left: 40%;
   padding-bottom: 3px;
   padding-bottom: 10px;
+  font-size: 2rem;
+
 }
 
 #name {
   margin-left: 40%;
   padding-top: 10px;
+  font-size: 2rem;
 }
 
 #userInfo {
@@ -151,6 +168,7 @@ ul {
   outline: none;
 }
 
+/* hover styling for userinfo */
 #userInfo:hover {
   background-color:grey;
 }
@@ -162,6 +180,7 @@ ul {
   text-align: center;
 }
 
+/* stling for buttons */
 #clear, #goBack {
   background-color:grey;;
   height: 20px;
@@ -182,6 +201,7 @@ ul {
   margin-top: 10px;
 }
 
+/* stling for hover action */
 #goBack:hover {
   background-color:gray;
 }
@@ -268,7 +288,7 @@ ul {
   }
 
   #question, .choices {
-      font-size: 14pt;
+      font-size: 1rem;
       margin-left: -6%;
   }
 }

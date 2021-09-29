@@ -7,17 +7,16 @@ margin: 0;
 font-family: 'Russo One', sans-serif;
 }
 
-/*Styling for entire webpage*/
+/*backgropund image */
 html {
+background: url(DarthVader.jpg) no-repeat center center fixed;  
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
 
-  background: url(DarthVader.jpg) no-repeat center center fixed;  
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  
-  }
-
+/* styling and alignment for h2 in highScore list */
 .highScoreList h2  {
 color: black;
 -webkit-text-stroke: 2px gold; 
@@ -25,8 +24,9 @@ font-size: 50pt;
 letter-spacing: 0.1em;
 margin-top: 30px;
 margin-left: 30vw;
-
 }
+
+/* styling and alignment for highScore list */
 .highScoreList {
 font-size: 10pt;
 letter-spacing: 0.1em;
@@ -34,17 +34,17 @@ margin-top: 20px;
 margin-bottom: 30px;
 }
 
+/* styling and alignment for buttons */
 .backBtn, .btn {
-  font-size: 10pt;
-  letter-spacing: 0.1em;
-  margin-top: 20px;
-  margin-left: 30vw;
-  background-color: black;
-  border-radius: 10px;
-  width: 300px;
-  height: 50px;
-  border: black;
-  color: gold; 
-  font-size: 20pt
-
+font-size: 10pt;
+letter-spacing: 0.1em;
+margin-top: 20px;
+margin-left: 30vw;
+background-color: black;
+border-radius: 10px;
+width: 300px;
+height: 50px;
+border: black;
+color: gold; 
+font-size: 20pt
 }
