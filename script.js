@@ -1,156 +1,246 @@
-// Variable Declarations 
-var header = document.getElementById("header");
-var intro = document.getElementById("intro");
-var quiz = document.getElementById("quiz");
-var question = document.getElementById("question");
-var choices = document.getElementById("choices");
-var choice1 = document.getElementById("1");
-var choice2 = document.getElementById("2");
-var choice3 = document.getElementById("3");
-var choice4= document.getElementById("4");
-var finalScore= document.getElementById("finalScore");
-var endMessage = document.getElementById("endMessage");
-var result = document.getElementById("result");
-var scoreList = document.getElementById("scorelist");
 
+// get elements for DOM manipulation
+// timer
+var timerEl = document.querySelector("#timer");
+// main
+var mainEl = document.querySelector("#main");
+// main, h1 for question display
+var questionEl = document.querySelector("#quiz-heading");
+// main, div for button/message display
+var messageEl = document.querySelector("#quiz-body");
+// get start button for click event
+var startBtn = document.querySelector("#start-quiz");
+// result 
+var resultEl = document.querySelector("#result");
 
-//The array of questions 
-var questions = [
-    { question: 'Commonly used data types DO NOT include:', 
-    choice1 : "1. strings",
-    choice2 : "2. booleans",
-    choice3 : "3. alerts",
-    choice4 : "4. numbers",
-    correct: "3"
-    },
-    { question: "Arrays in JavaScript can be used to store ________.", 
-    choice1 : "1. numbers and strings",
-    choice2 : "2. other arrays",
-    choice3 : "3. booleans",
-    choice4 : "4. all of the above",
-    correct: "4"
-    },
-    { question: "The condition in an if / else statement is enclosed with ________.", 
-    choice1 : "1. quotes",
-    choice2 : "2. curly brackets",
-    choice3 : "3. parenthesis",
-    choice4 : "4. square brackets",
-    correct: "2"
-    },
-    { question: "String values must be enclosed within ______ when being assigned to variables.", 
-    choice1 : "1. commas",
-    choice2 : "2. curly brackets",
-    choice3 : "3. quotes",
-    choice4 : "4. parenthesis",
-    correct: "3"
-    },
-    { question: "A very useful tool used during development and debugging for printing content to the debugger is:", 
-    choice1 : "1. JavaScript",
-    choice2 : "2. terminal/bash",
-    choice3 : "3. for loops",
-    choice4 : "4. console.log",
-    correct: "4"
-    },
-    { question: "A very useful tool used during development and debugging for printing content to the debugger is:", 
-    choice1 : "1. JavaScript",
-    choice2 : "2. terminal/bash",
-    choice3 : "3. for loops",
-    choice4 : "4. console.log",
-    correct: "4"
-    },
-]  
+// set global variables
+var questionsArr = [
+    {question: "An array can contain:",
+    options: ["Objects", "Strings", "Numbers", "All of the Above"],
+    answer: "4"},
+    {question: "What is used to contain the OPERATION of a function?",
+    options: ["Square Brackets [ ]", "Curly Brackets { }", "Parentheses ( )", 'Quotation Marks " "'],
+    answer: "2"},
+    {question: "A function will run automatically unless set as a variable.",
+    options: ["True", "False"],
+    answer: "2"},
+    {question: "This will require the user to select 'OK' or 'Cancel'.",
+    options: ["Confirm", "Alert", "Prompt", "Inform"],
+    answer: "1"},
+    {question: "What is used after a function name?",
+    options: ["Semi Colon ;", "Square Brackets [ ]", "Parentheses ( )", "Curly Brackets { }"],
+    answer: "3"},
+    {question: "This will require the user to input an answer:",
+    options: ["Prompt", "Alert", "Confirm", "Window"],
+    answer: "1"},
+    {question: "A PROMPT from the user always returns as a:",
+    options: ["Boolean", "Number", "String", "Variable"],
+    answer: "3"},
+    {question: "What is the index number of 'this' in this array: ['what', 'index', 'is, 'this']",
+    options: ["This", "3", "i", "4"],
+    answer: "2"},
+    {question: "An object is contained in:",
+    options: ["Parentheses ( )", "Colons : :", "Square Brackets [ ]", "Curly Brackets { }"],
+    answer: "4"},
+    {question: "A function must be called in order to run.",
+    options: ["True", "False"],
+    answer: "1"},
+    {question: "API stands for:",
+    options: ["Automatic Place Integer", "Application Pyramid Itemizer", "Automated Programmer Interface", "Application Programming Interface"],
+    answer: "4"},
+    {question: "DOM stans for:",
+    options: ["Document Override Method", "Document Object Model", "Decrement Object Material", "Do Observe More"],
+    answer: "2"},
+    {question: "This will increment by one each time:",
+    options: ["+-", "+=", "++", "=+"],
+    answer: "3"}
+];
+var indexNum = 0;
+var timer = 59;
+var correct = 0;
+var wrong = 0;
+var play = true;
+var highScores = [];
 
-//Challenge Page
-intro.style.display = "block";
-quiz.style.display = "none";
-finalScore.style.display = "none";
+// function to shuffle the array
+var shuffleArr = function(array) {
+    var ctr = array.length, temp, index;
+    while(ctr > 0) {
+        index = Math.floor(Math.random() * ctr);
+        ctr--;
+        temp = array[ctr];
+        array[ctr] = array[index];
+        array[index] = temp;
+    }
+    return array;
+};
 
-//Variable for Start Quiz Button
-var startBtn = document.getElementById("startBtn");
-
-// Listener Event to write password on click of "Start Quiz" button
-startBtn.addEventListener("click", startGame);
-
-
-// Timer Function Begin
-var timeLeft = 60;
-var startScore = 0;
-var timer = document.getElementById("timer");
-
-timer.textContent = "Time: " + startScore + "s";
-
-// Start Game
-function startGame() {
-    quiz.style.display = "block";
-    question.style.display ="block";
-    header.style.display = "block";
-    intro.style.display = "none";
-    finalScore.style.display = "none";
-
-
+// function for the timer
+var countdown = function() {
     var timeInterval = setInterval(function() {
-        timer.textContent = "Time:" + timeLeft + "s";
-        timeLeft-=1;
-
-        if(timeLeft === 0 || questions.length === runningQuestionIndex+1)  {
-            resultRender();
+        if(timer > 0 && play === true) {
+            timerEl.innerText = timer;
+            timer--;
+        } else {
+            timerEl.innerText = timer;
+            timerEl.setAttribute("style", "color: red;");
             clearInterval(timeInterval);
-            timer.textContent = "Time:" + timeLeft + "s";
-         }
+            endQuiz();
+        }
     }, 1000);
-
-    renderQuestion();
 };
 
-// Display Questions 
-var lastQuestionIndex = questions.length -1;
-var runningQuestionIndex = 0;    
+// function to start timer and start quiz
+var startQuiz = function() {
+    // shuffle array
+    shuffleArr(questionsArr);
+    //start timer
+    countdown();
+    // style quiz display section elements
+    questionEl.setAttribute("style", "text-align: left;");
+    messageEl.setAttribute("style", "margin-left: 25px; width: fit-content;");
+    // remove start button
+    startBtn.remove();
 
-function renderQuestion() {
-    var q = questions[runningQuestionIndex];
-    question.innerHTML = q.question;
-    choice1.innerHTML = q.choice1;
-    choice2.innerHTML = q.choice2;
-    choice3.innerHTML = q.choice3;
-    choice4.innerHTML = q.choice4;
+    runQuiz();
 };
 
-// Check Answers
-function checkAnswer(answer) {
-    if(questions[runningQuestionIndex].correct == answer) {
-        answerOutput.textContent = "Well done✔️"
+// function to start time and begin quiz
+var runQuiz = function() {
+    // if the indexNum is greater than length of the questionsArr, end quiz
+    if(indexNum === questionsArr.length) {
+        play = false;
+    } else {
+        // set variables from object in questionsArr index
+        var question = questionsArr[indexNum].question;
+        var options = questionsArr[indexNum].options;
+        answer = questionsArr[indexNum].answer;
+        // change h1 to the question
+        questionEl.textContent = question;
+        // remove div contents
+        messageEl.textContent = "";
+        // for each of the 4 options, create a button and append it to the now empty div
+        for (var i = 0; i < options.length; i++) {
+            var btnEl = document.createElement("button");
+            btnEl.className = "btn guess-list";
+            btnEl.setAttribute("btn-id", [i+1]);
+            btnEl.textContent = `${[i+1]}. ${options[i]}`;
+            messageEl.appendChild(btnEl);
+        }
+        // increment indexNum to use in next run through
+        indexNum++;
+        // at this point the application will wait for the user to click on the page before continuing
     }
-    else {
-       answerOutput.textContent = "Sorry ❌"
-       timeLeft -=10;
-    }
-
-    if (questions.length === runningQuestionIndex+1) {
-        resultRender(); // If it has gone through all questions, show final score
-        return;
-    }
-        runningQuestionIndex++;
-        renderQuestion();
-    };   
-
-//Score Quiz
-function resultRender() {
-   quiz.style.display = "none";
-   intro.style.display = "none";
-   finalScore.style.display = "block";
-
-   if (timeLeft === 0 || questions.length -1) { 
-    result.textContent = "Your final score is " + timeLeft + ".";
-   }
 };
 
-//Capture Score and Initials 
-userInfo.addEventListener("click", function() {
+// function for when the user clicks on the screen
+var guessHandler = function(event) {
+    // on click, ensure a guess button was clicked
+    var targetEl = event.target;
+    if(targetEl.matches(".guess-list")) {
+        // get button id of guess, pass to guess compare function
+        var guessId = targetEl.getAttribute("btn-id");
+        guessCompare(guessId);
+    }
+};
+
+// function to compare the guess to the actual answer 
+var guessCompare = function(guessId) {
+    // if guessed correct
+    if(guessId === answer) {
+        // add to timer, increase correct var, display correct, run next question
+        timer += 3;
+        correct++;
+        resultEl.innerText = "Well Done ✔️";
+        runQuiz();
+    // if guessed incorrect
+    } else {
+        // subtract from timer, increase wrong var, display wrong, run next question
+        timer -= 10;
+        wrong++;
+        resultEl.innerText = "Sorry ❌";
+        runQuiz();
+    }
+};
+
+// function to endQuiz when all questions answered or timer runs out
+var endQuiz = function() {
+    // ensure score can't be negative
+    if(timer < 0) {
+        timer = 0;
+        timerEl.innerText = timer;
+    }
+    // update DOM
+    questionEl.removeAttribute("style");
+    questionEl.textContent = "Let's see how you did!";
+    messageEl.innerHTML = `<div>You got ${correct} questions correct and ${wrong} questions wrong.</div><div>Your time score is: ${timer}.</div>`;
+    // create and append a form elements for submitting initials
+    var formEl = document.createElement("form");
+    formEl.setAttribute("id", "initials-form")
+    var inputEl = document.createElement("input");
+    inputEl.setAttribute("type", "text");
+    inputEl.setAttribute("name", "user-initials");
+    inputEl.className = "user-initials";
+    inputEl.setAttribute("placeholder", "Enter Your Initials");
+    formEl.appendChild(inputEl);
+    var submitEl = document.createElement("button");
+    submitEl.className = "btn";
+    submitEl.setAttribute("id", "save-initials");
+    submitEl.setAttribute("type", "submit");
+    submitEl.textContent = "Submit";
+    formEl.appendChild(submitEl);
+    // append the entire form to the messageEl
+    messageEl.appendChild(formEl);
+};
+
+// function for submit button
+var saveHighScore = function(event) {
+    // prevent default
     event.preventDefault();
-    var contactInfo = document.getElementById("contactInfo").value;
+    // only run if the submit button is being clicked
+    var targetEl = event.target;
+    if(targetEl.matches("#save-initials")) {
+        // get the initial entry form element
+        var formEl = document.querySelector(".user-initials");
+        var userInitials = formEl.value
+        // ensure initials have been entered
+        if(!userInitials) {
+            alert("Please enter your initials to submit your score... this does not seem to be optional.");
+            return false;
+        // save user input and score to localStorage
+        } else {
+            var highScoreObj = {
+                initials: userInitials,
+                score: timer
+            };
+            // send obj to highScores array
+            highScores.push(highScoreObj);
+            // save highScores array to local storage
+            localStorage.setItem("scores", JSON.stringify(highScores));
+            // redirect user to the high score page
+            location.replace("https://caz1502.github.io/Code-Quiz/highScores.html");
+        }
+    }
+};
 
-    localStorage.setItem("contactInfo", JSON.stringify (contactInfo));
-    localStorage.setItem("timeLeft", JSON.stringify(timeLeft));
-    
-    loadScores();
-    });
+// function to get and update high scores
+var loadScores = function() {
+    highScores = localStorage.getItem("scores");
+    // check if scores is null/falsy
+    if(!highScores) {
+        highScores = [];
+        return false;
+    }
+    // convert highScores from stringified format to an array of objects
+    highScores = JSON.parse(highScores);
+};
+
+// event listener for click of start button
+startBtn.addEventListener("click", startQuiz);
+// event listener for click of a guess button during quiz
+messageEl.addEventListener("click", guessHandler);
+// event listener for submit button
+mainEl.addEventListener("click", saveHighScore);
+
+// load any high scores from the localStorage
+loadScores();
