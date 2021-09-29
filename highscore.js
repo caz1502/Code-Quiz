@@ -9,11 +9,9 @@ var finalScore = {
   contactInfo: 'Briana',
   timeleft: "30"
 }
-
 var finalScore = [];
 
-
-//Load Scores 
+//Load Scores - not working
 var loadScores = function() {
   var finalScore = localStorage.getItem("contactInfo, timeLeft");
   
